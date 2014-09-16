@@ -27,8 +27,8 @@ module DoughUnifiedCredential
 
     ROUTES.each do |controller, actions|
       actions.each do |action, detail|
-        define_method "#{action}_#{controller.gsub(/(s*)$/, '')}" do |arg|
-          perform(detail["method"].downcase.to_sym, detail["path"].concat('.json'), arg)
+        define_method "#{action}_#{controller.gsub(/(s*)$/, '')}" do |*args|
+          perform(detail["method"].downcase.to_sym, detail["path"].concat('.json'), args.first || {})
         end
       end
     end
@@ -67,28 +67,3 @@ module DoughUnifiedCredential
     end
   end
 end
-
-client = DoughUnifiedCredential::Client.new(port: 3000)
-
-
-## == New user ================================== ##
-new_user = {
-            :email => "dain@email2.com",
-            :name => "dain",
-            :nickname => "dain",
-            :password => "password",
-            :password_confirmation => "password"
-           }
-
-binding.pry
-new_registration = client.create_registration(new_user)
-
-# response = client.perform(new_registration["method"], new_registration["path"], new_user)
-
-# -- response types ---------------------------- ##
-# response.status
-# response.body
-# 400 - Bad Request - email already taken
-# 201 - Success - resource as json object
-
-## -- Update user ------------------------------ ##
