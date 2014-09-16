@@ -12,7 +12,6 @@ module DoughUnifiedCredential
 
     def initialize(options = {})
       build_client(options)
-      @routes = ROUTES
     end
 
     def routes
@@ -28,13 +27,13 @@ module DoughUnifiedCredential
     ROUTES.each do |controller, actions|
       actions.each do |action, detail|
         define_method "#{action}_#{controller.gsub(/(s*)$/, '')}" do |*args|
-          perform(detail["method"].downcase.to_sym, detail["path"].concat('.json'), args.first || {})
+          perform(detail["method"].downcase.to_sym, detail["path"].concat('.json'), build_request_format(args.first || {}))
         end
       end
     end
 
     def perform(method, route, payload = {})
-      @client.send(method, route, build_request_format(payload))
+      @client.send(method, route, payload)
     end
 
     private

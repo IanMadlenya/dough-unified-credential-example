@@ -8,6 +8,7 @@ class HmacUtils
     end
 
     def to_param_format(params, namespace=nil)
+      params.permit(:user, :client_name)
       params.collect do |key, value|
         if value.is_a? Hash
           namespace ? to_param_format(value, "#{namespace}[#{key}]") : to_param_format(value, key)
