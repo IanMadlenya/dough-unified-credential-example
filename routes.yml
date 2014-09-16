@@ -1,0 +1,49 @@
+sessions:
+  create:
+    method: POST
+    path: /users/sign_in
+  new:
+    method: GET
+    path: /users/sign_in
+  delete:
+    method: DELETE
+    path: /users/sign_out
+registrations:
+  cancel:
+    method: GET
+    path: /users/cancel
+  create:
+    method: POST
+    path: /users
+  new:
+    method: GET
+    path: /users/sign_up
+  edit:
+    method: GET
+    path: /users/edit
+  update:
+    method: PUT
+    path: /users
+  destroy:
+    method: DELETE
+    path: /users
+passwords:
+  create:
+    method: POST
+    path: /users/password
+  new:
+    method: GET
+    path: /users/password/new
+  edit:
+    method: GET
+    path: /users/password/edit
+  update:
+    method: PUT
+    path: /users/password
+o_auth:
+  edit:
+    method: GET
+    path: /auth/:provider/initiate
+  update:
+    method: GET
+    path: /auth/:provider/callback
