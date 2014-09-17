@@ -1,6 +1,4 @@
 require_relative 'spec_helper'
-require_relative '../client.rb'
-require 'faker'
 
 describe DoughUnifiedCredential::Client do
 

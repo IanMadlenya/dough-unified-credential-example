@@ -1,4 +1,4 @@
-require_relative 'client'
+load File.expand_path('../config/environment.rb',  __FILE__)
 # Note: If you get a Faraday::ConnectionRefused ~> start DUC server or point in correct location
 
 ## == Set port of DUC server (only setup for local)=============== ##
@@ -47,3 +47,4 @@ response = client.create_session(new_user)
 # 201 - Success - resource as json object
 
 ## == Delete session ============================================= ##
+

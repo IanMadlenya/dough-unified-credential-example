@@ -1,10 +1,9 @@
 class HmacUtils
   class << self
-    ##
-    # Sign a set of params to be passed to the Unified Credentials server using the api token from config/unified_auth_secret.yml
-    def sign_message(params, api_token)
+    # Sign a set of params to be passed to the Unified Credentials server using the api token from config/secret.yml
+    def sign_message(params)
       sha256 = OpenSSL::Digest.new("sha256")
-      OpenSSL::HMAC.hexdigest(sha256, api_token, to_param_format(params))
+      OpenSSL::HMAC.hexdigest(sha256, ENV["API_TOKEN"], to_param_format(params))
     end
 
     def to_param_format(params, namespace=nil)
