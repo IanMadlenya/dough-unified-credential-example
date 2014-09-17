@@ -19,7 +19,7 @@ module DoughUnifiedCredential
     ROUTES.each do |controller, actions|
       actions.each do |action, detail|
         define_method "#{action}_#{controller.gsub(/(s*)$/, '')}" do |*args|
-          perform(detail["method"].downcase.to_sym, detail["path"].concat('.json'), build_request_format(args.first || {}))
+          perform(detail["method"].downcase.to_sym, detail["path"].concat(".json"), build_request_format(args.first || {}))
         end
       end
     end
@@ -31,8 +31,8 @@ module DoughUnifiedCredential
     private
 
     def build_request_format(payload = {})
-      # 1. add user node to user parameters
-      params = {user: payload.permit(:email, :name, :nickname, :password, :password_confirmation, :current_password)}
+      # 1. make sure user node before user parameters
+      params = if payload.empty? then {} else {user: payload.permit(:email, :name, :nickname, :password, :password_confirmation, :current_password)} end
       # 2. add client domain and hashify signature
       signatured_params = params.merge(client_name: ENV["DOMAIN_NAME"])
       request_signature = HmacUtils.sign_message(signatured_params)
@@ -43,8 +43,8 @@ module DoughUnifiedCredential
 
     def build_client(options)
       @client = Faraday.new(:url => "http://localhost:#{options[:port]}") do |faraday|
-        faraday.request  :url_encoded             # form-encode POST params
-        faraday.response :logger                  # log requests to STDOUT
+        faraday.request  :url_encoded
+        faraday.response :logger
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
     end
