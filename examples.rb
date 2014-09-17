@@ -12,7 +12,7 @@ def results(response)
 end
 ## == Set port of DUC server (only setup for local)=============== ##
 
-client = DoughUnifiedCredential::Client.new(port: 3000)
+client = DoughUnifiedCredential::Client.new(port: 3000, logger: true)
 
 ## == View Routes ================================================ ##
 
@@ -61,3 +61,9 @@ results client.create_session(existing_user)
 # response.body
 # 404
 # 201 - Success - resource as json object
+
+
+## == Update password ============================================= ##
+
+
+# TODO
