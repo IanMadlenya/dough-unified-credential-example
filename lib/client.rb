@@ -38,12 +38,11 @@ module DoughUnifiedCredential
 
     def build_request_format(payload = {})
       # 1. make sure add a user or session node before parameters
-      params =  if payload.empty?
-                  {}
-                elsif payload[:token]
-                  { session: payload.permit(:token) }
-                else
-                  { user: valid_user_params(payload) }
+      params =  case
+                  when payload.empty? then {}
+                  when payload[:token] then { session: payload.permit(:token) }
+                  when payload[:reset_password_token] then payload
+                  else { user: valid_user_params(payload) }
                 end
       # 2. add client domain and hashify signature
       signatured_params = params.merge(client_name: ENV["DOMAIN_NAME"])

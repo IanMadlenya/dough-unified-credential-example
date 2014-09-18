@@ -1,4 +1,5 @@
 load File.expand_path('../../config/environment.rb',  __FILE__)
+Dir["spec/support/**/*.rb"].each { |f| load f }
 
 RSpec.configure do |config|
   config.failure_color = :red

@@ -4,6 +4,7 @@ require 'json'
 require 'faraday'
 require 'rspec'
 require 'faker'
+require 'nokogiri'
 
 ROUTES = YAML::load_file("config/routes.yml")
 Dir['lib/*.rb'].each { |file| load file }
