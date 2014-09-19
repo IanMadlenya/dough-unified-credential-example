@@ -17,13 +17,13 @@ DoughUnifiedCredential::Client.new(options) # options include port (i.e. 3000) f
 
 You must first setup a valid client domain with an api token via DUCS admin portal. Pull down the repo for DUCS, start it up and navigate to /admin and enter your admin credentials.
 
-**First Time Users:** In DUCS rails console, create a new AdminUser and then use the credentials to log in as admin at /admin. Alternatively, you can create a client domain directly in the console and manually create an api token as a string.
+**First Time Users:** In DUCS rails console, create a new AdminUser and then use the credentials to log in as an admin at /admin. Alternatively, you can create a client domain directly in the console and manually create an api token as a string.
 
 Once logged in, create a new client domain (in active admin top nav section), including an api token.
 
-Copy and paste the api token and domain name into this repo's config/secret.yml with API_TOKEN and DOMAIN_NAME as key names. These values are instantiated into the environment for this mini application through environment.rb.
+Copy and paste the api token and domain name into this repo's config/secret.yml with API_TOKEN and DOMAIN_NAME as keys. These key, values are instantiated as environment variables for this mini application via environment.rb.
 
-Note: If you get a Faraday connection refused, your DUCS probably isn't on the same port as the faraday client.
+*Note: If you get a Faraday connection refused, your DUCS probably isn't on the same port as the faraday client.*
 
 ### DUCS Routes
 
