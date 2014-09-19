@@ -1,10 +1,11 @@
-require 'rubygems'
-require 'pry'
+require 'faker'
 require 'json'
 require 'faraday'
-require 'rspec'
-require 'faker'
 require 'nokogiri'
+require 'pry'
+require 'rspec'
+require 'rubygems'
+require 'YAML'
 
 ROUTES = YAML::load_file("config/routes.yml")
 Dir['lib/*.rb'].each { |file| load file }
